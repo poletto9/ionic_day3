@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest'; // เพิ่มขึ้นมาใหม่ตอน get ค่าจาก json
 
 /**
@@ -15,17 +15,18 @@ import { RestProvider } from '../../providers/rest/rest'; // เพิ่มข�
 })
 export class HomePage {
 
-  group_val : any
+  group_val: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public app: App,
     public alertCtrl: AlertController,
-    public rest: RestProvider) {
+    public rest: RestProvider,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    
+
     //call function
     this.feedGroup();
   }
@@ -54,6 +55,11 @@ export class HomePage {
         }
       ]
     });
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     confirm.present();
 
   }
@@ -68,9 +74,14 @@ export class HomePage {
       })
   }
 
-  goContact(id){
+  goContact(id) {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     // alert(id);
-    this.navCtrl.push('PersonPage',{dev_id:id});
+    this.navCtrl.push('PersonPage', { dev_id: id });
   }
 
 }

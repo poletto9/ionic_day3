@@ -15,11 +15,11 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class PersonPage {
 
-  contact_val : any
-  division_id : any
+  contact_val: any
+  division_id: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public rest : RestProvider) {
+    public rest: RestProvider) {
     this.division_id = this.navParams.get('dev_id')
   }
 
@@ -36,6 +36,11 @@ export class PersonPage {
       }, (err) => {
         console.log(err)
       })
+  }
+
+  // call persondetail page with object parameter
+  goPersonDetail(key_obj) {
+    this.navCtrl.push('PersondetailPage',{person_data:key_obj});
   }
 
 }

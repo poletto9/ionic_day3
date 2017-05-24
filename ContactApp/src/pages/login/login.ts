@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { RestProvider } from '../../providers/rest/rest';
 
@@ -22,8 +22,9 @@ export class LoginPage {
   password: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public rest: RestProvider,
-    public alertCtrl: AlertController) { // ประกาศตัวแปร rest แทน class RestProvider
+    public rest: RestProvider, // ประกาศตัวแปร rest แทน class RestProvider
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -32,6 +33,14 @@ export class LoginPage {
   }
 
   doSubmit() {
+
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+
+
     // request data
     this.rest.doPostLogin(this.username, this.password)
       .subscribe((data: any) => {
@@ -54,6 +63,8 @@ export class LoginPage {
       }, (err) => {
         console.log(err);
       })
+
+
   }
 
 

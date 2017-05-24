@@ -16,7 +16,7 @@
 <ion-content padding>
 
   <ion-list>
-    <button ion-item *ngFor="let key of contact_val; let i = index">
+    <button ion-item *ngFor="let key of contact_val; let i = index" (click) = 'goPersonDetail(key)'>
 
       <h5>({{i+1}}) {{key.pname}} {{ key.fname }} {{key.lname}}</h5>
       <p>{{key.position_name}}</p>
