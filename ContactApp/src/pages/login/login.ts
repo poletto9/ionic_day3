@@ -36,7 +36,8 @@ export class LoginPage {
 
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 3000
+      spinner: 'dots',
+      // duration: 3000
     });
     loader.present();
 
@@ -60,8 +61,11 @@ export class LoginPage {
           });
           alert.present();
         }
+
+        loader.dismiss();
       }, (err) => {
         console.log(err);
+        loader.dismiss();
       })
 
 
